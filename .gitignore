@@ -1,0 +1,21 @@
+# Entornos virtuales (ignora la carpeta entera donde instalaste Python local)
+venv/
+env/
+.venv/
+
+# Base de datos local (evita que subas datos de prueba)
+db.sqlite3
+
+# Archivos compilados y caché de Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Archivos de sistema operativo y editores (VS Code, etc.)
+.DS_Store
+.vscode/
+.idea/
+
+# Archivos de variables de entorno (por si luego usás un .env)
+.env
