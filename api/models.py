@@ -69,14 +69,20 @@ class Trabajo(models.Model):
 
     @property
     def total_pagado(self):
-        # Devuelve la suma como Decimal para no romper las matemáticas de Django
+        # Si el trabajo es nuevo y todavía no se guardó, no hay pagos
+        if not self.pk: 
+            return Decimal('0.00')
+            
         suma = self.pagos.aggregate(total=Sum('monto'))['total']
         return suma if suma else Decimal('0.00')
         
     @property
     def deuda_pendiente(self):
-        # El precio original + intereses - lo que ya te dejó a cuenta
-        deuda = (self.precio_final + self.recargo_mora) - self.total_pagado
+        # Si los campos están vacíos (None), los convertimos a 0 automáticamente
+        precio = self.precio_final if self.precio_final else Decimal('0.00')
+        recargo = self.recargo_mora if self.recargo_mora else Decimal('0.00')
+        
+        deuda = (precio + recargo) - self.total_pagado
         return deuda if deuda > 0 else Decimal('0.00')
 
     @property
