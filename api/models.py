@@ -12,12 +12,28 @@ class Cliente(models.Model):
     def __str__(self):
         return self.nombre
 
+class Marca(models.Model):
+    nombre = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.nombre
+
+class Modelo(models.Model):
+    marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.marca.nombre} {self.nombre}"
+
 class Vehiculo(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name="vehiculos")
     marca = models.CharField(max_length=50)
     modelo = models.CharField(max_length=50)
     anio = models.IntegerField(verbose_name="Año")
     patente = models.CharField(max_length=10, unique=True)
+
+    marca_fk = models.ForeignKey(Marca, on_delete=models.SET_NULL, null=True, blank=True)
+    modelo_fk = models.ForeignKey(Modelo, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"{self.marca} {self.modelo} ({self.patente})"
