@@ -41,6 +41,7 @@ class MarcaViewSet(viewsets.ModelViewSet):
     serializer_class = MarcaSerializer
 
 class ModeloViewSet(viewsets.ModelViewSet):
+    queryset = Modelo.objects.all() 
     serializer_class = ModeloSerializer
     
     def get_queryset(self):
