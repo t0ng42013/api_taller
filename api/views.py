@@ -1,8 +1,8 @@
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets
-from .models import Cliente, Vehiculo, Trabajo, Pago
-from .serializers import ClienteSerializer, VehiculoSerializer, TrabajoSerializer, PagoSerializer
+from .models import Cliente, Vehiculo, Trabajo, Pago, Marca, Modelo
+from .serializers import ClienteSerializer, VehiculoSerializer, TrabajoSerializer, PagoSerializer, MarcaSerializer, ModeloSerializer
 
 class ClienteViewSet(viewsets.ModelViewSet):
     queryset = Cliente.objects.all()
@@ -35,3 +35,23 @@ class TrabajoViewSet(viewsets.ModelViewSet):
 class PagoViewSet(viewsets.ModelViewSet):
     queryset = Pago.objects.all()
     serializer_class = PagoSerializer
+
+class MarcaViewSet(viewsets.ModelViewSet):
+    queryset = Marca.objects.all()
+    serializer_class = MarcaSerializer
+
+class ModeloViewSet(viewsets.ModelViewSet):
+    serializer_class = ModeloSerializer
+    
+    def get_queryset(self):
+        # Empezamos con todos los modelos
+        queryset = Modelo.objects.all()
+        
+        # Leemos si la URL trae un parámetro "?marca=X"
+        marca_id = self.request.query_params.get('marca')
+        
+        # Si trae un ID de marca, filtramos la lista
+        if marca_id is not None:
+            queryset = queryset.filter(marca_id=marca_id)
+            
+        return queryset
