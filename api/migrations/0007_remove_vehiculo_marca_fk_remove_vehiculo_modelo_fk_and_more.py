@@ -13,20 +13,20 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RemoveField(
             model_name='vehiculo',
-            name='marca_fk',
+            name='marca',
         ),
         migrations.RemoveField(
             model_name='vehiculo',
-            name='modelo_fk',
-        ),
-        migrations.AlterField(
-            model_name='vehiculo',
-            name='marca',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='api.marca'),
-        ),
-        migrations.AlterField(
-            model_name='vehiculo',
             name='modelo',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='api.modelo'),
+        ),
+        migrations.RenameField(
+            model_name='vehiculo',
+            old_name='marca_fk',
+            new_name='marca',
+        ),
+        migrations.RenameField(
+            model_name='vehiculo',
+            old_name='modelo_fk',
+            new_name='modelo',
         ),
     ]
