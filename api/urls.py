@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.routers import DefaultRouter
-from api.views import ClienteViewSet, MarcaViewSet, ModeloViewSet, PagoViewSet, TrabajoViewSet, VehiculoViewSet
+from api.views import ClienteViewSet, MarcaViewSet, ModeloViewSet, PagoViewSet, TrabajoViewSet, VehiculoViewSet,TipoTrabajoViewSet, NivelDificultadViewSet
 
 
 router = DefaultRouter()
@@ -11,6 +11,9 @@ router.register(r'trabajos', TrabajoViewSet)
 router.register(r'pagos', PagoViewSet)
 router.register(r'marcas', MarcaViewSet)
 router.register(r'modelos', ModeloViewSet)
+
+router.register(r'tipos-trabajo', TipoTrabajoViewSet)
+router.register(r'dificultades', NivelDificultadViewSet)
 
 urlpatterns = [
     # Si alguien entra a tu-web.com/api/login/, va a caer acá.

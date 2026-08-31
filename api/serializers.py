@@ -35,3 +35,13 @@ class ModeloSerializer(serializers.ModelSerializer):
     class Meta:
         model = Modelo
         fields = '__all__'
+
+class TipoTrabajoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TipoTrabajo
+        fields = '__all__'
+
+class NivelDificultadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NivelDificultad
+        fields = '__all__'

@@ -1,8 +1,9 @@
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets
-from .models import Cliente, Vehiculo, Trabajo, Pago, Marca, Modelo
-from .serializers import ClienteSerializer, VehiculoSerializer, TrabajoSerializer, PagoSerializer, MarcaSerializer, ModeloSerializer
+from .models import Cliente, Vehiculo, Trabajo, Pago, Marca, Modelo,TipoTrabajo, NivelDificultad
+from .serializers import ClienteSerializer, VehiculoSerializer, TrabajoSerializer, PagoSerializer, MarcaSerializer, ModeloSerializer,TipoTrabajoSerializer, NivelDificultadSerializer
+
 
 class ClienteViewSet(viewsets.ModelViewSet):
     queryset = Cliente.objects.all()
@@ -56,3 +57,12 @@ class ModeloViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(marca_id=marca_id)
             
         return queryset
+
+
+class TipoTrabajoViewSet(viewsets.ModelViewSet):
+    queryset = TipoTrabajo.objects.all()
+    serializer_class = TipoTrabajoSerializer
+
+class NivelDificultadViewSet(viewsets.ModelViewSet):
+    queryset = NivelDificultad.objects.all()
+    serializer_class = NivelDificultadSerializer
