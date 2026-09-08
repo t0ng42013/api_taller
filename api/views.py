@@ -1,4 +1,5 @@
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import viewsets
 from .models import Cliente, Vehiculo, Trabajo, Pago, Marca, Modelo,TipoTrabajo, NivelDificultad
@@ -6,14 +7,17 @@ from .serializers import ClienteSerializer, VehiculoSerializer, TrabajoSerialize
 
 
 class ClienteViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Cliente.objects.all()
     serializer_class = ClienteSerializer
 
 class VehiculoViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Vehiculo.objects.all()
     serializer_class = VehiculoSerializer
 
 class TrabajoViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Trabajo.objects.all()
     serializer_class = TrabajoSerializer
 
@@ -34,14 +38,17 @@ class TrabajoViewSet(viewsets.ModelViewSet):
         return Response(lista_deudores)
 
 class PagoViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Pago.objects.all()
     serializer_class = PagoSerializer
 
 class MarcaViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Marca.objects.all()
     serializer_class = MarcaSerializer
 
 class ModeloViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Modelo.objects.all() 
     serializer_class = ModeloSerializer
     
@@ -60,9 +67,11 @@ class ModeloViewSet(viewsets.ModelViewSet):
 
 
 class TipoTrabajoViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = TipoTrabajo.objects.all()
     serializer_class = TipoTrabajoSerializer
 
 class NivelDificultadViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = NivelDificultad.objects.all()
     serializer_class = NivelDificultadSerializer
